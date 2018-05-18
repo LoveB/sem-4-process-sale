@@ -39,46 +39,41 @@ public class View {
 
         controller.startSale(CashPay);
 
-
         List<ItemId> items = new ArrayList<>();
 
-        items.add(new ItemId(111));
-        items.add(new ItemId(123));
-        items.add(new ItemId(100002));
+        items.add(new ItemId(100));
+      //  items.add(new ItemId(100003));
+      //  items.add(new ItemId(100002));
 
         System.out.println();
 
         System.out.println("REGISTERED ITEMS: ");
         String dottedLine = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  ";
+        String smallDots = "....................................................................  ";
 
         for (ItemId item : items) {
-
-
             try {
                 System.out.println(dottedLine);
-
                 SaleInfo saleInfoSweater = controller.addItem(item);
                 printSaleInfo(saleInfoSweater);
-
                 System.out.println();
-
             }
-
         catch (OperationFailedException exc){
                 handleException(exc.getMessage(), exc);
         }
-
     }
 
-        System.out.println("....................................................................");
+        System.out.println(smallDots);
         Amount totalCost = controller.stopAddingItems();
+        System.out.println();
+
         System.out.println("Total Cost with tax included: " + totalCost);
 
         System.out.println();
 
-        System.out.println("....................................................................");
-        Amount paidAmount = new Amount(2000);
-        System.out.println("Paid Amount: " + paidAmount);
+        System.out.println(smallDots);
+        Amount paidAmount = new Amount(600);
+       // System.out.println("Paid Amount: " + paidAmount);
 
         System.out.println();
         System.out.println();
@@ -92,14 +87,15 @@ public class View {
 
         System.out.println();
 
-        System.out.println("Change: " + change);
+       // System.out.println("Change: " + change);
 
         System.out.println();
-        System.out.println(dottedLine);
         System.out.println();
 
         System.out.println("LOG");
         System.out.println();
+
+        System.out.println(".................................................................................................");
 
         logger.printLogList();
 
@@ -107,10 +103,8 @@ public class View {
     }
 
     private void handleException(String uiMsg, Exception exc) {
-
             errorMsgHandler.showErrorMsg(uiMsg);
             logger.logException(exc);
-
         }
 
         private void printSaleInfo(SaleInfo saleInfo){
@@ -119,8 +113,4 @@ public class View {
         System.out.println("Item Price: " + saleInfo.getItemPrice());
         System.out.println("Running Total: " + saleInfo.getRunningTotal());
     }
-
-
-
-
 }

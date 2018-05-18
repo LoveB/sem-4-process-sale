@@ -81,14 +81,18 @@ public class Sale {
         notifyObservers(paidAmount);
         Amount change = payment.calculateChange();
         if(payment.paymentTooSmall()){
+            delay(2000);
             System.out.println("Payment is too small");
             System.out.println();
+            System.out.println("- - - - - - - - - - - - - - - - - - - ");
             return new Amount(0);
         }
         fullyPaid = true;
 
         return change;
     }
+
+
 
     /**
      * adds an additional payment to the specific sale if last payment was too small
@@ -106,12 +110,25 @@ public class Sale {
 
         if(!payment.paymentTooSmall()){
             fullyPaid = true;
+        }else {
+
+            delay(2000);
+
+            System.out.println("Payment is too small");
+            System.out.println();
+            System.out.println("- - - - - - - - - - - - - - - - - - - ");
         }
-        System.out.println("Payment is too small");
-        System.out.println();
 
         Amount change = payment.calculateChange();
         return change;
+    }
+
+    private void delay(int millis){
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     private Amount addAdditionalToTotalPaid(Amount paidAdditional){
