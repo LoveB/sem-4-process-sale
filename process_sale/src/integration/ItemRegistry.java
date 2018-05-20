@@ -59,7 +59,6 @@ import model.ItemId;
         return convertedDTO;
     }
 
-
     private boolean matches(ItemId found, ItemId searched){
         if (found.getItemId() != searched.getItemId()){
             return false;

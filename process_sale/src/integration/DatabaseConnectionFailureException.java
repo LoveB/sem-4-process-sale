@@ -6,7 +6,7 @@ public class DatabaseConnectionFailureException extends RuntimeException {
     /**
      * Creates a new instance representing the condition described in the specified message.
      *
-     * @param itemRegistry
+     * @param itemRegistry The database for the items.
      */
      DatabaseConnectionFailureException(ItemRegistry itemRegistry){
         super("Unable to access database " + itemRegistry.getDatabaseNr());

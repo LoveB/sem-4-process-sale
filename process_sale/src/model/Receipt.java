@@ -1,6 +1,5 @@
 package model;
 
-
 /**
  * The receipt of a rental
  */

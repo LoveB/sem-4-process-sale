@@ -1,6 +1,5 @@
 package model;
 
-
 /**
  * Represents a payment made in cash.
  */

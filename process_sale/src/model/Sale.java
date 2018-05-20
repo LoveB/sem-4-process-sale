@@ -18,9 +18,7 @@ public class Sale {
     private CashPayment payment;
     private Amount totalTax;
     private Boolean fullyPaid = false;
-
     private List<TotalRevenueObserver> revenueObservers = new ArrayList<>();
-
 
     /**
      * Creates a new instance.
@@ -54,7 +52,6 @@ public class Sale {
         return saleInfo;
     }
 
-
     private void createNewSaleItem(ItemDTO foundItem){
         saleItems.add(new SaleItem( foundItem.getItemId(), foundItem.getItemPrice(), foundItem.getItemTax(), foundItem.getItemName()));
     }
@@ -68,13 +65,11 @@ public class Sale {
     }
 
     /**
-     * adds a payment to the specific sale
+     * adds a cash payment to the specific sale
      *
-     * @param payment specifies what payment that is added to the sale. Payment is also used to calculate change.
+     * @param payment specifies what cash payment that is added to the sale. Payment is also used to calculate change.
      * @return amount of change to give back.
      */
-
-
      Amount CashPay(CashPayment payment){
         this.payment = payment;
         Amount paidAmount = payment.getPaidAmount();
@@ -88,11 +83,8 @@ public class Sale {
             return new Amount(0);
         }
         fullyPaid = true;
-
         return change;
     }
-
-
 
     /**
      * adds an additional payment to the specific sale if last payment was too small
@@ -100,25 +92,18 @@ public class Sale {
      * @param paidAdditional specifies what payment that is added to the sale.
      * @return amount of change to give back.
      */
-
      Amount CashPayAdditional(Amount paidAdditional){
-
        Amount totalPaidAmount = addAdditionalToTotalPaid(paidAdditional);
-        notifyObservers(paidAdditional);
-
+       notifyObservers(paidAdditional);
        payment.setPaidAmount(totalPaidAmount);
-
         if(!payment.paymentTooSmall()){
             fullyPaid = true;
         }else {
-
             delay(2000);
-
             System.out.println("Payment is too small");
             System.out.println();
             System.out.println("- - - - - - - - - - - - - - - - - - - ");
         }
-
         Amount change = payment.calculateChange();
         return change;
     }

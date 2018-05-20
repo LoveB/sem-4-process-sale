@@ -17,7 +17,6 @@ public class ExtSystemHandler {
     public ExtSystemHandler(){
         this.accountingSystem = new AccountingSystem();
         this.inventorySystem = new InventorySystem();
-
     }
 
     /**

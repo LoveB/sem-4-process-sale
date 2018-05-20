@@ -29,6 +29,7 @@ public class Controller {
     /**
      * Creates a new instance of Sale
      *
+     * @param payMethod The chosen method of payment.
      */
     public void startSale(PayMethod payMethod){
        this.payMethod = payMethod;
@@ -56,14 +57,11 @@ public class Controller {
             SaleInfo saleInfo = sale.addItemToSale(foundItem);
             return saleInfo;
 
-        } catch(DatabaseConnectionFailureException databaseFailureExc){
-            throw new OperationFailedException("Unable to access database", databaseFailureExc);
-
-
-        } catch(ItemRegistryException itemRegExc){
-            throw new OperationFailedException("Item not found: " + itemId, itemRegExc);
+            } catch(DatabaseConnectionFailureException databaseFailureExc){
+                throw new OperationFailedException("Unable to access database", databaseFailureExc);
+            } catch(ItemRegistryException itemRegExc){
+                throw new OperationFailedException("Item not found: " + itemId, itemRegExc);
         }
-
     }
 
     /**
@@ -77,8 +75,8 @@ public class Controller {
     }
 
     /**
-     * Tells the system what amount that been paid by customer.Program creates a CashPayment instance
-     * and calculate the change.
+     * Tells the system what amount that been paid by customer.Program calls the correct payMethod
+     * based on input in startSale.
      *
      * @param paidAmount Used to create a payment object and to calc change.
      * @return How much change to give back to customer.
@@ -89,7 +87,6 @@ public class Controller {
         closeSale();
         return change;
     }
-
 
     private void closeSale(){
         dbHandler.closeSale(sale);

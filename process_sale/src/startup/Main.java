@@ -1,14 +1,11 @@
 package startup;
 
 import controller.Controller;
-import model.PayByCash;
 import view.TotalRevenueView;
 import view.View;
 import integration.ExtSystemHandler;
 import integration.DbHandler;
-
 import java.io.IOException;
-
 
 public class Main {
     /**
@@ -21,7 +18,6 @@ public class Main {
         DbHandler dbHandler = new DbHandler();
         Controller controller = new Controller(extSystemHandler, dbHandler);
         controller.addTotalRevenueObserver(new TotalRevenueView());
-
         new View(controller).sampleExecution();
     }
 }
